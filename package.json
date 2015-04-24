@@ -1,0 +1,32 @@
+{
+  "name": "pocket-promise",
+  "description": "A promise-based client for getpocket.com API.",
+  "version": "1.0.0",
+  "author": "Peter deHaan <peter@deseloper.com> (http://nodeexamples.com/)",
+  "bugs": {
+    "url": "https://github.com/pdehaan/pocket-promise/issues"
+  },
+  "dependencies": {
+    "joi": "6.3.0",
+    "lodash": "3.7.0",
+    "promise": "7.0.1",
+    "request-promise": "0.4.2"
+  },
+  "devDependencies": {
+    "standard": "3.7.1"
+  },
+  "homepage": "https://github.com/pdehaan/pocket-promise",
+  "keywords": [
+    "pocket",
+    "getpocket"
+  ],
+  "license": "WTFPL",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pdehaan/pocket-promise.git"
+  },
+  "scripts": {
+    "test": "standard && node test"
+  }
+}
