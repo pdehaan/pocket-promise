@@ -5,7 +5,7 @@ A promise-based client for [getpocket.com](http://getpocket.com/developer/) API.
 ## Installation:
 
 ```sh
-$ npm i pdehaan/pocket-promise -S
+$ npm i pocket-promise -S
 ```
 
 ## Usage:
