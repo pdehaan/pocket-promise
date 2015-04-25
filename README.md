@@ -142,6 +142,8 @@ Alias for `Pocket#send()` API.
 
 ### `Pocket#action(action, options)`
 
+For more information, see <https://getpocket.com/developer/docs/v3/modify>.
+
 #### Usage:
 
 ```js
@@ -150,9 +152,20 @@ pocket.action('favorite', {
 }).then(console.log).catch(console.error)
 ```
 
+#### Response:
+
+```json
+{
+  action_results: [ true ],
+  status: 1
+}
+```
+
 ---
 
 ### `Pocket#archive(options)`
+
+Alias for `pocket.action('archive', options)`. For more information, see <https://getpocket.com/developer/docs/v3/modify#action_archive>.
 
 #### Usage:
 
@@ -166,6 +179,8 @@ pocket.archive({
 
 ### `Pocket#delete(options)`
 
+Alias for `pocket.action('delete', options)`. For more information, see <https://getpocket.com/developer/docs/v3/modify#action_delete>.
+
 #### Usage:
 
 ```js
@@ -174,9 +189,20 @@ pocket.delete({
 }).then(console.log).catch(console.error)
 ```
 
+#### Response:
+
+```json
+{
+  action_results: [ true ],
+  status: 1
+}
+```
+
 ---
 
 ### `Pocket#favorite(options)`
+
+Alias for `pocket.action('favorite', options)`. For more information, see <https://getpocket.com/developer/docs/v3/modify#action_favorite>.
 
 #### Usage:
 
@@ -184,4 +210,13 @@ pocket.delete({
 pocket.favorite({
   item_id: 20646
 }).then(console.log).catch(console.error)
+```
+
+#### Response:
+
+```json
+{
+  action_results: [ true ],
+  status: 1
+}
 ```

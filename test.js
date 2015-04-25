@@ -46,4 +46,4 @@ var p = new Pocket(config)
 //   url: 'https://bing.com'
 // }).then(console.log).catch(console.error)
 
-p.favorite({item_id: 20646}).then(console.log).catch(console.error)
+p.delete({item_id: 20646}).then(console.log).catch(console.error)
