@@ -58,7 +58,7 @@ var pocket = new Pocket({
 
 ### `Pocket#add(options)`
 
-To save an item to a user's Pocket list, you'll make a single request to the /v3/add endpoint.
+To save an item to a user's Pocket list, you'll make a single request to the [/v3/add](https://getpocket.com/developer/docs/v3/add) endpoint.
 
 #### Usage:
 
@@ -68,7 +68,7 @@ pocket.add({
 }).then(console.log).catch(console.error)
 ```
 
-> **NOTE:** In order to use the /v3/add endpoint, your consumer key must have the "Add" permission.
+> **NOTE:** In order to use the [/v3/add](https://getpocket.com/developer/docs/v3/add) endpoint, your consumer key must have the "Add" permission.
 
 For more information, see <https://getpocket.com/developer/docs/v3/add>.
 
@@ -76,7 +76,7 @@ For more information, see <https://getpocket.com/developer/docs/v3/add>.
 
 ### `Pocket#get(options)`
 
-To retrieve item(s) from a user's Pocket list, you'll make a request to the /v3/get endpoint.
+To retrieve item(s) from a user's Pocket list, you'll make a request to the [/v3/get](https://getpocket.com/developer/docs/v3/retrieve) endpoint.
 
 #### Usage:
 
@@ -88,7 +88,7 @@ pocket.get({
 }).then(console.log).catch(console.error)
 ```
 
-> **NOTE:** In order to use the /v3/get endpoint, your consumer key must have the "Retrieve" permission.
+> **NOTE:** In order to use the [/v3/get](https://getpocket.com/developer/docs/v3/retrieve) endpoint, your consumer key must have the "Retrieve" permission.
 
 For more information, see <https://getpocket.com/developer/docs/v3/retrieve>.
 
@@ -96,13 +96,13 @@ For more information, see <https://getpocket.com/developer/docs/v3/retrieve>.
 
 ### `Pocket#retrieve(options)`
 
-Alias for `Pocket#get()` API.
+Alias for [`Pocket#get()`](/README.md#pocketgetoptions) API.
 
 ---
 
 ### `Pocket#send(options)`
 
-Pocket's /v3/send endpoint allows you to make a change or batch several changes to a user's list or Pocket data.
+Pocket's [/v3/send](https://getpocket.com/developer/docs/v3/modify) endpoint allows you to make a change or batch several changes to a user's list or Pocket data.
 
 #### Usage:
 
@@ -121,14 +121,12 @@ pocket.send({
 
 ```json
 {
-  "action_results": [
-    true
-  ],
+  "action_results": [ true ],
   "status": 1
 }
 ```
 
-> **NOTE:** In order to use the /v3/send endpoint, your consumer key must have the "Modify" permission.
+> **NOTE:** In order to use the [/v3/send](https://getpocket.com/developer/docs/v3/modify) endpoint, your consumer key must have the "Modify" permission.
 
 For more information, see <https://getpocket.com/developer/docs/v3/modify>.
 
@@ -136,7 +134,7 @@ For more information, see <https://getpocket.com/developer/docs/v3/modify>.
 
 ### `Pocket#modify(options)`
 
-Alias for `Pocket#send()` API.
+Alias for [`Pocket#send()`](/README.md#pocketsendoptions) API.
 
 ---
 
@@ -156,8 +154,8 @@ pocket.action('favorite', {
 
 ```json
 {
-  action_results: [ true ],
-  status: 1
+  "action_results": [ true ],
+  "status": 1
 }
 ```
 
@@ -165,7 +163,7 @@ pocket.action('favorite', {
 
 ### `Pocket#archive(options)`
 
-Alias for `pocket.action('archive', options)`. For more information, see <https://getpocket.com/developer/docs/v3/modify#action_archive>.
+Alias for [`pocket.action('archive', options)`](/README.md#pocketactionaction-options). For more information, see <https://getpocket.com/developer/docs/v3/modify#action_archive>.
 
 #### Usage:
 
@@ -179,7 +177,7 @@ pocket.archive({
 
 ### `Pocket#delete(options)`
 
-Alias for `pocket.action('delete', options)`. For more information, see <https://getpocket.com/developer/docs/v3/modify#action_delete>.
+Alias for [`pocket.action('delete', options)`](/README.md#pocketactionaction-options). For more information, see <https://getpocket.com/developer/docs/v3/modify#action_delete>.
 
 #### Usage:
 
@@ -193,8 +191,8 @@ pocket.delete({
 
 ```json
 {
-  action_results: [ true ],
-  status: 1
+  "action_results": [ true ],
+  "status": 1
 }
 ```
 
@@ -202,7 +200,7 @@ pocket.delete({
 
 ### `Pocket#favorite(options)`
 
-Alias for `pocket.action('favorite', options)`. For more information, see <https://getpocket.com/developer/docs/v3/modify#action_favorite>.
+Alias for [`pocket.action('favorite', options)`](/README.md#pocketactionaction-options). For more information, see <https://getpocket.com/developer/docs/v3/modify#action_favorite>.
 
 #### Usage:
 
@@ -216,7 +214,7 @@ pocket.favorite({
 
 ```json
 {
-  action_results: [ true ],
-  status: 1
+  "action_results": [ true ],
+  "status": 1
 }
 ```
