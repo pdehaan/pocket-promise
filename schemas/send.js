@@ -22,7 +22,7 @@ module.exports = Joi.object().keys({
   // REQUIRED
   consumer_key: Joi.string().required(),
   access_token: Joi.string().required(),
-  actions: Joi.array().required().items(Joi.object().keys({
+  actions: Joi.array().required().description('JSON array of actions.').items(Joi.object().keys({
     action: Joi.string().required().valid(VALID_ACTIONS),
     item_id: Joi.number().integer().required(),
 

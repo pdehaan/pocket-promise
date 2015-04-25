@@ -3,7 +3,7 @@ var validatep = require('./lib/validatep')
 var pocketApi = require('./lib/pocket-api').pocketApi
 
 // API schemas
-var SCHEMAS = require('./schemas/index')
+var schemas = require('./schemas/index')
 
 // Pocket API routes
 var routes = {
@@ -16,12 +16,10 @@ var routes = {
   GET_URL: '/v3/get',
   SEND_URL: '/v3/send'
 }
-// Pocket API Schemas
-var schemas = SCHEMAS
 
 /**
  * [Pocket description]
- * @param {[type]} config [description]
+ * @param {Object} config [description]
  *
  * @constructor
  */
@@ -33,6 +31,7 @@ function Pocket (config) {
 Pocket.prototype = {
   /**
    * [setConfig description]
+   *
    * @param {Object} config [description]
    */
   setConfig: function setConfig (config) {
@@ -41,6 +40,7 @@ Pocket.prototype = {
 
   /**
    * [getRequestToken description]
+   *
    * @param {Object} options [description]
    * @param {String} options.consumer_key [description]
    * @param {String} options.redirect_uri [description]
@@ -53,6 +53,7 @@ Pocket.prototype = {
 
   /**
    * [add description]
+   *
    * @param {Object} options [description]
    * @return {Promise}       [description]
    */
@@ -62,6 +63,7 @@ Pocket.prototype = {
 
   /**
    * [get description]
+   *
    * @param {Object} options [description]
    * @return {Promise}       [description]
    */
@@ -71,6 +73,7 @@ Pocket.prototype = {
 
   /**
    * Alias for `get()` API.
+   *
    * @param  {Object} options [description]
    * @return {Promise}        [description]
    */
@@ -80,6 +83,7 @@ Pocket.prototype = {
 
   /**
    * [send description]
+   *
    * @param  {Object} options [description]
    * @return {Promise}        [description]
    */
@@ -89,11 +93,57 @@ Pocket.prototype = {
 
   /**
    * Alias for `send()` API.
+   *
    * @param  {Object} options [description]
    * @return {Promise}        [description]
    */
   modify: function modify (options) {
     return this.send(options)
+  },
+
+  /**
+   * Proxy function for performing actions.
+   *
+   * @param  {String} action  [description]
+   * @param  {Object} options [description]
+   * @return {Promise}        [description]
+   */
+  action: function action (action, options) {
+    options.action = action
+    return this.send({actions: [options]})
+  },
+
+  /**
+   * Shortcut for archiving an item.
+   *
+   * @param  {Object} options [description]
+   * @param  {Number} options.item_id The id of the item to perform the action on.
+   * @return {Promise}        [description]
+   */
+  archive: function actionArchive (options) {
+    return this.action('archive', options)
+  },
+
+  /**
+   * Shortcut for deleting an item.
+   *
+   * @param  {Object} options [description]
+   * @param  {Number} options.item_id The id of the item to perform the action on.
+   * @return {Promise}        [description]
+   */
+  delete: function actionDelete (options) {
+    return this.action('delete', options)
+  },
+
+  /**
+   * Shortcut for favoriting an item.
+   *
+   * @param  {Object} options [description]
+   * @param  {Number} options.item_id The id of the item to perform the action on.
+   * @return {Promise}        [description]
+   */
+  favorite: function actionFavorite (options) {
+    return this.action('favorite', options)
   },
 
   /**
@@ -112,6 +162,11 @@ Pocket.prototype = {
     return validatep(options, schema).then(api)
   },
 
+  /**
+   * Stringify an object for easier debugging.
+   * @param  {Object} obj [description]
+   * @return {String}     Pretty formatted JSON object.
+   */
   toString: function (obj) {
     return JSON.stringify(obj, null, 2)
   }
