@@ -110,6 +110,10 @@ Pocket.prototype = {
     merge(options, this.config)
     // Validate the schema and call the target API.
     return validatep(options, schema).then(api)
+  },
+
+  toString: function (obj) {
+    return JSON.stringify(obj, null, 2)
   }
 }
 

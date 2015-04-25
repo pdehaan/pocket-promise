@@ -120,6 +120,40 @@ Alias for `Pocket#get()` API.
 
 Pocket's /v3/send endpoint allows you to make a change or batch several changes to a user's list or Pocket data.
 
+#### Usage:
+
+```js
+var Pocket = require('pocket-promise')
+
+var p = new Pocket({
+  consumer_key: 'YOUR CONSUMER KEY HERE',
+  access_token: 'YOUR ACCESS TOKEN HERE'
+})
+p.send({
+  actions: [
+    {
+      action: 'favorite',
+      item_id: 20646
+    }
+  ]
+}).then(function (results) {
+  console.log(JSON.stringify(results, null, 2))
+}).catch(function (err) {
+  console.error(err.toString())
+})
+```
+
+##### Response:
+
+```json
+{
+  "action_results": [
+    true
+  ],
+  "status": 1
+}
+```
+
 > **NOTE:** In order to use the /v3/send endpoint, your consumer key must have the "Modify" permission.
 
 For more information, see <https://getpocket.com/developer/docs/v3/modify>.
