@@ -1,7 +1,7 @@
 {
   "name": "pocket-promise",
   "description": "A promise-based client for getpocket.com API.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "Peter deHaan <peter@deseloper.com> (http://nodeexamples.com/)",
   "bugs": {
     "url": "https://github.com/pdehaan/pocket-promise/issues"
