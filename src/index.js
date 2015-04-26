@@ -1,7 +1,7 @@
-var merge = require('lodash').merge
+var {merge} = require('lodash')
 
-var pocketApi = require('./lib/pocket-api').pocketApi
-var routes = require('./lib/routes').routes
+var {pocketApi} = require('./lib/pocket-api')
+var {routes} = require('./lib/routes')
 var schemas = require('./schemas/index')
 var validatep = require('./lib/validatep')
 

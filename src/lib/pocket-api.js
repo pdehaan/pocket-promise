@@ -1,4 +1,4 @@
-var partial = require('lodash').partial
+var {partial} = require('lodash')
 var request = require('request-promise')
 
 var POCKET_URI = process.env.POCKET_URI || 'https://getpocket.com'
