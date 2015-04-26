@@ -1,6 +1,6 @@
-'use strict'
-
 var Joi = require('joi')
+
+var base = require('./base')
 
 var VALID_ACTIONS = [
   // Basic Actions
@@ -18,10 +18,8 @@ var VALID_ACTIONS = [
   'tags_rename'
 ]
 
-module.exports = Joi.object().keys({
+module.exports = base.keys({
   // REQUIRED
-  consumer_key: Joi.string().required(),
-  access_token: Joi.string().required(),
   actions: Joi.array().required().description('JSON array of actions.').items(Joi.object().keys({
     action: Joi.string().required().valid(VALID_ACTIONS),
     item_id: Joi.number().integer().required(),
@@ -35,5 +33,4 @@ module.exports = Joi.object().keys({
     old_tag: Joi.string().optional(),
     new_tag: Joi.string().optional()
   }))
-  // OPTIONAL
 })

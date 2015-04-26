@@ -7,7 +7,7 @@
     "url": "https://github.com/pdehaan/pocket-promise/issues"
   },
   "dependencies": {
-    "joi": "6.3.0",
+    "joi": "6.4.1",
     "lodash": "3.7.0",
     "promise": "7.0.1",
     "request-promise": "0.4.2"
@@ -21,12 +21,21 @@
     "getpocket"
   ],
   "license": "WTFPL",
-  "main": "index.js",
+  "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/pdehaan/pocket-promise.git"
   },
   "scripts": {
-    "test": "standard && node test"
+    "compile": "babel src --out-dir dist",
+    "outdated": "npm outdated --depth 0",
+    "precompile": "npm test",
+    "prepublish": "npm run compile",
+    "test": "standard && npm run outdated"
+  },
+  "standard": {
+    "ignore": [
+      "dist/**"
+    ]
   }
 }
