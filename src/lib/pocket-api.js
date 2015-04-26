@@ -29,12 +29,12 @@ var pocketApiRequest = request.defaults({
  * @param  {Object} options An object containing parameters to pass to the API endpoint.
  * @return {Promise}        A promise, as returned by the `pocketApiRequest()` API.
  */
-function apiUrl (path, options) {
+function _apiUrl (path, options) {
   return pocketApiRequest(path, {
     json: options
   })
 }
 
 exports.pocketApi = function (path) {
-  return partial(apiUrl, path)
+  return partial(_apiUrl, path)
 }

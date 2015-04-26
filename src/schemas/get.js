@@ -1,16 +1,14 @@
-'use strict'
-
 var Joi = require('joi')
+
+var base = require('./base')
 
 var VALID_CONTENT_TYPES = ['article', 'image', 'video']
 var VALID_DETAIL_TYPES = ['simple', 'complete']
 var VALID_SORT = ['newest', 'oldest', 'title', 'site']
 var VALID_STATES = ['unread', 'archive', 'all']
 
-module.exports = Joi.object().keys({
+module.exports = base.keys({
   // REQUIRED
-  consumer_key: Joi.string().required(),
-  access_token: Joi.string().required(),
   // OPTIONAL
   state: Joi.number().optional().valid(VALID_STATES),
   favorite: Joi.number().optional().valid(0, 1),
