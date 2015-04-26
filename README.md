@@ -31,6 +31,8 @@ pocket.get({
 }
 ```
 
+**PROTIP:** If I were you, I'd add the _./config.json_ file to your .gitignore file, but that's just me.
+
 ## API:
 
 ### `new Pocket(config)`
