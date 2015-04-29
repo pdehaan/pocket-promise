@@ -10,10 +10,12 @@
     "joi": "6.4.1",
     "lodash": "3.7.0",
     "promise": "7.0.1",
-    "request-promise": "0.4.2"
+    "request-promise": "0.4.2",
+    "require-directory": "2.1.0"
   },
   "devDependencies": {
-    "standard": "3.7.1"
+    "rimraf": "2.3.2",
+    "standard": "3.7.2"
   },
   "homepage": "https://github.com/pdehaan/pocket-promise",
   "keywords": [
@@ -27,10 +29,12 @@
     "url": "https://github.com/pdehaan/pocket-promise.git"
   },
   "scripts": {
+    "build": "npm run clean; npm run compile",
+    "clean": "rimraf dist .DS_Store npm-debug.log",
     "compile": "babel src --out-dir dist",
     "outdated": "npm outdated --depth 0",
-    "precompile": "npm test",
-    "prepublish": "npm run compile",
+    "prebuild": "npm test",
+    "prepublish": "npm run build",
     "test": "standard && npm run outdated"
   },
   "standard": {

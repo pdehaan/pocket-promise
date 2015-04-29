@@ -1,13 +1,16 @@
+var url = require('url')
+
 var {merge} = require('lodash')
 
-var {pocketApi} = require('./lib/pocket-api')
+var {pocketApi, POCKET_URI} = require('./lib/pocket-api')
 var {routes} = require('./lib/routes')
-var schemas = require('./schemas/index')
 var validatep = require('./lib/validatep')
+var schemas = require('./schemas/index')
 
 class Pocket {
   /**
-   * [constructor description]
+   * Create a new Pocket instance and optionally specify a `config` object.
+   *
    * @param  {Object} config Options that will be passed with each request to the Pocket APIs.
    * @constructor
    */
@@ -16,7 +19,8 @@ class Pocket {
   }
 
   /**
-   * [setConfig description]
+   * Set the Pocket configuration.
+   *
    * @param {Object} config Options to pass to the Pocket endpoint's API.
    * @method setConfig
    */
@@ -25,7 +29,55 @@ class Pocket {
   }
 
   /**
-   * [add description]
+   * Get an OAuth request token from the Pocket server.
+   * For more information, see <https://getpocket.com/developer/docs/authentication>.
+   *
+   * @param  {Object} options [description]
+   * @return {Promise}        [description]
+   */
+  oauthRequest (options) {
+    return this._proxy(routes.OAUTH_REQUEST_URL, schemas.OAUTH_REQUEST, options)
+  }
+
+  /**
+   * Alias for `Pocket#oauthRequest()`.
+   *
+   * @param  {Object} options [description]
+   * @return {Promise}        [description]
+   */
+  getRequestToken (options) {
+    return this.oauthRequest(options)
+  }
+
+  /**
+   * Get an authorize URL from Pocket to allow user's to grant access to their Pocket account.
+   * For more information, see <https://getpocket.com/developer/docs/authentication>.
+   *
+   * @param  {Object} options [description]
+   * @return {String}         [description]
+   */
+  getAuthorizeUrl (options) {
+    return validatep(options, schemas.AUTH_AUTHORIZE).then(function (options) {
+      var authUrl = url.parse(POCKET_URI)
+      authUrl.pathname = routes.AUTH_AUTHORIZE_URL
+      authUrl.query = options
+      return authUrl
+    }).then(url.format)
+  }
+
+  /**
+   * [getAccessToken description]
+   *
+   * @param  {Object} options [description]
+   * @return {Promise}        [description]
+   */
+  getAccessToken (options) {
+    return this._proxy(routes.OAUTH_AUTHORIZE_URL, schemas.OAUTH_AUTHORIZE, options)
+  }
+
+  /**
+   * To save an item to a user's Pocket list, you'll make a single request to the [/v3/add](https://getpocket.com/developer/docs/v3/add) endpoint.
+   *
    * @param  {Object} options Options to pass to the Pocket endpoint's API.
    * @return {Promise}        [description]
    * @method add
@@ -35,7 +87,8 @@ class Pocket {
   }
 
   /**
-   * [get description]
+   * To retrieve item(s) from a user's Pocket list, you'll make a request to the [/v3/get](https://getpocket.com/developer/docs/v3/retrieve) endpoint.
+   *
    * @param  {Object} options Options to pass to the Pocket endpoint's API.
    * @return {Promise}        [description]
    * @method get
@@ -46,6 +99,7 @@ class Pocket {
 
   /**
    * Alias for `Pocket#get()`.
+   *
    * @method retrieve
    */
   retrieve (options) {
@@ -53,7 +107,8 @@ class Pocket {
   }
 
   /**
-   * [send description]
+   * Pocket's [/v3/send](https://getpocket.com/developer/docs/v3/modify) endpoint allows you to make a change or batch several changes to a user's list or Pocket data.
+   *
    * @param  {Object} options Options to pass to the Pocket endpoint's API.
    * @return {Promise}        [description]
    * @method send
@@ -64,6 +119,7 @@ class Pocket {
 
   /**
    * Alias for `Pocket#send()`.
+   *
    * @method modify
    */
   modify (options) {
@@ -72,6 +128,7 @@ class Pocket {
 
   /**
    * Alias for `Pocket#send(options)`.
+   *
    * @param  {String} action  An action to send to the `send()` method. For example: 'favorite'.
    * @param  {Object} options Options to pass to the Pocket endpoint's API.
    * @return {Promise}        [description]
@@ -79,11 +136,14 @@ class Pocket {
    */
   action (action, options) {
     options.action = action
-    return this.send({actions: [options]})
+    return this.send({
+      actions: [options]
+    })
   }
 
   /**
    * Alias for `Pocket#action('archive', options)`.
+   *
    * @param  {Object} options Options to pass to the Pocket endpoint's API.
    * @return {Promise}        [description]
    * @method archive
@@ -94,6 +154,7 @@ class Pocket {
 
   /**
    * Alias for `Pocket#action('delete', options)`.
+   *
    * @param  {Object} options Options to pass to the Pocket endpoint's API.
    * @return {Promise}        [description]
    * @method delete
@@ -104,6 +165,7 @@ class Pocket {
 
   /**
    * Alias for `Pocket#action('favorite', options)`.
+   *
    * @param  {Object} options Options to pass to the Pocket endpoint's API.
    * @return {Promise}        [description]
    * @method favorite
@@ -114,6 +176,7 @@ class Pocket {
 
   /**
    * Proxy function for the getpocket.com API.
+   *
    * @param  {String} route   Endpoint for the Pocket API. For example: '/v3/get'.
    * @param  {Object} schema  Joi schema used to validate `options` object.
    * @param  {Object} options Options to pass to the Pocket endpoint's API.

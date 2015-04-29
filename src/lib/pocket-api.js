@@ -38,3 +38,5 @@ function _apiUrl (path, options) {
 exports.pocketApi = function (path) {
   return partial(_apiUrl, path)
 }
+
+exports.POCKET_URI = POCKET_URI
